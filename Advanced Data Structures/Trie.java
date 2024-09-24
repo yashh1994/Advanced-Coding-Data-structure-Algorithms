@@ -25,12 +25,12 @@ class Node{
 }
 
 class Trie{
-    private Node root;
+    private final Node root;
 
     Trie() { // Fix: Removed 'void' to make it a proper constructor
         root = new Node();
     }
-    
+
     void addWord(String word){
         Node node = root;
         for (int i = 0; i < word.length(); i++){
@@ -68,6 +68,7 @@ class Trie{
 
 class TrieTest {
     public static void main(String[] args) {
+        
         Trie trie = new Trie();
 
         // Test case 1: Add and search a word
