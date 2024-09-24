@@ -1,13 +1,10 @@
-
-
-
 class Node{
     
     Node[] links = new Node[26];
     boolean flag = false;
 
     void put(char ch,Node n){
-        links[ch] = n;
+        links[ch - 'a'] = n;
     }
 
     Node get(char ch){
@@ -30,10 +27,10 @@ class Node{
 class Trie{
     private Node root;
 
-    void Trie(){
+    Trie() { // Fix: Removed 'void' to make it a proper constructor
         root = new Node();
-    } 
-
+    }
+    
     void addWord(String word){
         Node node = root;
         for (int i = 0; i < word.length(); i++){
@@ -65,5 +62,32 @@ class Trie{
             node = node.get(word.charAt(i));
         }
         return true;
+    }
+}
+
+
+class TrieTest {
+    public static void main(String[] args) {
+        Trie trie = new Trie();
+
+        // Test case 1: Add and search a word
+        trie.addWord("hello");
+        System.out.println(trie.searchWord("hello")); // Expected output: true
+
+        // Test case 2: Search for a word that doesn't exist
+        System.out.println(trie.searchWord("world")); // Expected output: false
+
+        // Test case 3: Search for a prefix that exists
+        System.out.println(trie.searchPrefix("hell")); // Expected output: true
+
+        // Test case 4: Search for a prefix that doesn't exist
+        System.out.println(trie.searchPrefix("heaven")); // Expected output: false
+
+        // Test case 5: Add another word and search
+        trie.addWord("world");
+        System.out.println(trie.searchWord("world")); // Expected output: true
+
+        // Test case 6: Search for a word that is a prefix of another word
+        System.out.println(trie.searchWord("hell")); // Expected output: false
     }
 }
